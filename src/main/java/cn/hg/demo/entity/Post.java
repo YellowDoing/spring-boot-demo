@@ -1,12 +1,31 @@
 package cn.hg.demo.entity;
 
+import java.util.List;
+
 public class Post {
 
     private int id;
     private String content;
     private int type;
     private String create_time;
-    private int user_id;
+    private User creator;
+    private List<Comment> comments;
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
     public int getId() {
         return id;
@@ -38,13 +57,5 @@ public class Post {
 
     public void setCreate_time(String create_time) {
         this.create_time = create_time;
-    }
-
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
     }
 }
