@@ -4,9 +4,9 @@ import javax.validation.constraints.NotNull;
 
 public class User {
 
-    @NotNull
+    @NotNull(message = "username不能为空")
     private String username;
-    @NotNull
+    @NotNull(message = "password不能为空")
     private String password;
 
     public String getUsername() {

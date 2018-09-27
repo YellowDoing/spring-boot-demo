@@ -1,10 +1,11 @@
 package cn.hg.demo.exception;
 
 import org.springframework.validation.Errors;
+import org.springframework.validation.ObjectError;
 
 public class ValidateException extends Exception {
 
-    public ValidateException(Errors errors) {
-        super(errors.getAllErrors().size() > 0 ? errors.getAllErrors().get(0).getDefaultMessage():"");
+    public ValidateException(ObjectError error) {
+        super(error.getDefaultMessage());
     }
 }
