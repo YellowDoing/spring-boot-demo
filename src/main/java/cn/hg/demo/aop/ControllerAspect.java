@@ -1,12 +1,15 @@
 package cn.hg.demo.aop;
 
-
 import cn.hg.demo.exception.ValidateException;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BeanPropertyBindingResult;
 
+
+/**
+ * 控制器校验
+ */
 @Aspect
 @Component
 public class ControllerAspect {
@@ -16,7 +19,7 @@ public class ControllerAspect {
     }
 
     @Around("pointCut()")
-    public Object printAround(ProceedingJoinPoint jp) throws ValidateException, Throwable {
+    public Object validateErrors(ProceedingJoinPoint jp) throws Throwable {
         Object[] objects = jp.getArgs();
         for (Object o : objects ){
             System.out.println(o.getClass().getName());
