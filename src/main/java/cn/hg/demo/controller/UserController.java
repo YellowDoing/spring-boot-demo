@@ -25,7 +25,7 @@ public class UserController {
 
     @PostMapping("/login")
     @ApiOperation(value = "登录")
-    public User login(@RequestBody @Validated @ApiParam(example = "{username:\"asdawd\"}") User user, @ApiIgnore Errors errors) {
+    public User login( @ApiParam(name="用户对象",value="传入json格式",required=true) @RequestBody @Validated User user, @ApiIgnore Errors errors) {
         return userMapper.login(user);
     }
 
