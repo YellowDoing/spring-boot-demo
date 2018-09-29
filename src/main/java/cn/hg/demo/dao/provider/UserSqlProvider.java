@@ -5,7 +5,7 @@ import org.apache.ibatis.jdbc.SQL;
 
 public class UserSqlProvider {
 
-/*    public String getUserInfoUpdateSql(User user) {
+    public String getUserInfoUpdateSql(User user) {
         SQL sql = new SQL().UPDATE("user");
 
         if (user.getPhone() != null) {
@@ -18,5 +18,5 @@ public class UserSqlProvider {
             sql.SET("nickname = \"" + user.getNickname()+"\"");
         }
         return sql.WHERE("id = " + user.getId()).toString();
-    }*/
+    }
 }

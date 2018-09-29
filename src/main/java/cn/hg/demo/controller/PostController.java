@@ -20,7 +20,6 @@ public class PostController {
     public Response<List<Post>> getPosts(){
 
         return new Response<>();
+
     }
-
-
 }
