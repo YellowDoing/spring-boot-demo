@@ -1,21 +1,14 @@
 package cn.hg.demo.entity;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-
-@ApiModel
 public class Comment {
 
     private int id;
-    @ApiModelProperty(value = "评论内容",required = true)
     private String content;
     private int user_id;
     private int type;
-    @ApiModelProperty(value = "被评论的评论id")
     private int comment_id;
     private int comment_user_id;
     private int like_num;
-    @ApiModelProperty(value = "帖子id",required = true)
     private int post_id;
     private String create_time;
 

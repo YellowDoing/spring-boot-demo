@@ -12,10 +12,11 @@ public interface UserMapper {
 
     @Insert("INSERT INTO user (username, password) VALUES (#{username},#{password})")
     @Options(useGeneratedKeys = true)
-    void register(User user);
+    int register(User user);
 
     @UpdateProvider(type = UserSqlProvider.class, method = "getUserInfoUpdateSql")
     int updateUserInfo(User user);
 
+    User findUserByToken();
 
 }

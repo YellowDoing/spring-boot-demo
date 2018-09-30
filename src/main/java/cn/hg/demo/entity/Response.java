@@ -9,7 +9,7 @@ public class Response<T> {
     private T data;
 
     public Response() {
-        code = 200;
+        code = 10000;
         message = "操作成功";
     }
 

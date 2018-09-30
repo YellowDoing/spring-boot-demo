@@ -4,43 +4,35 @@ import cn.hg.demo.dao.UserMapper;
 import cn.hg.demo.entity.Response;
 import cn.hg.demo.entity.User;
 import cn.hg.demo.exception.ValidateException;
-import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import springfox.documentation.annotations.ApiIgnore;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.constraints.NotNull;
 
 @RestController
-@Api(tags = "user", description = "用户")
 public class UserController {
 
     @Autowired
     UserMapper userMapper;
 
     @PostMapping("/login")
-    @ApiOperation(value = "登录")
-    public User login( @ApiParam(name="用户对象",value="传入json格式",required=true) @RequestBody @Validated User user, @ApiIgnore Errors errors) {
+    public User login(@Validated @RequestBody User user, Errors errors) {
         return userMapper.login(user);
     }
 
 
     @PostMapping("/user")
-    @ApiOperation(value = "注册")
-    public String register(@RequestBody @Validated User user, @ApiIgnore Errors errors) {
-        userMapper.register(user);
-        return user.getId() + "";
+    public Response register(@RequestBody User user , Errors errors){
+        int isSuccess = userMapper.register(user);
+        return new Response();
     }
 
 
     @PutMapping("/user")
-    @ApiOperation(value = "修改用户信息")
-    public int updateUserInfo(@RequestBody User user, @ApiIgnore Errors errors) {
+    public int updateUserInfo(@RequestBody User user,Errors errors) {
         userMapper.updateUserInfo(user);
         return userMapper.updateUserInfo(user);
     }
