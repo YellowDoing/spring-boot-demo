@@ -1,24 +1,36 @@
 package cn.hg.demo.entity;
 
-public class Comment {
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+public class Comment extends BaseBean{
 
     private int id;
     private String content;
     private int user_id;
+
+    @NotNull(message = "请传入type")
+    @Size(max = 2,message = "请输入正确的type")
     private int type;
+
+    @NotNull(message = "请输入正确的level")
+    @Size(max = 2,message = "请输入正确的type")
+    private int level;
+
     private int comment_id;
     private int comment_user_id;
     private int like_num;
+
+    @NotNull(message = "请输入post_id")
+    @Size(min = 1 ,message = "请输入正确的post_id")
     private int post_id;
-    private String create_time;
 
-
-    public String getCreate_time() {
-        return create_time;
+    public int getLevel() {
+        return level;
     }
 
-    public void setCreate_time(String create_time) {
-        this.create_time = create_time;
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     public int getId() {

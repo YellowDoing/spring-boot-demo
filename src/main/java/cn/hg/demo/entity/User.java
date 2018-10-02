@@ -2,7 +2,7 @@ package cn.hg.demo.entity;
 
 import javax.validation.constraints.NotNull;
 
-public class User {
+public class User extends BaseBean{
 
     private int id;
     private String username;

@@ -1,27 +1,30 @@
 package cn.hg.demo.entity;
 
+import org.hibernate.validator.constraints.Range;
+
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-public class Post {
+public class Post extends BaseBean{
 
     private Integer id;
 
     private String content;
 
-    @NotNull
+    @Range(min = 1,max = 4,message = "请输入正确的type类型")
+    @NotNull(message = "type不能为空")
     private Integer type;
 
-    private String create_time;
+
 
     private User creator;
 
     private List<Comment> comments;
 
-    @NotNull
+    @NotNull(message = "user_id不能为空")
     private Integer user_id;
 
-    @NotNull
+    @NotNull(message = "token不能为空")
     private String token;
 
     public String getToken() {
@@ -78,11 +81,5 @@ public class Post {
         this.content = content;
     }
 
-    public String getCreate_time() {
-        return create_time;
-    }
 
-    public void setCreate_time(String create_time) {
-        this.create_time = create_time;
-    }
 }

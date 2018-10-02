@@ -28,4 +28,20 @@ public class GlobalExceptionHandler {
         return new Response(DemoExceptionEnum.MISSING_REQUEST_BODY_EXCEPTION);
     }
 
+    /**
+     * token验证失效
+     */
+    @ExceptionHandler(TokenException.class)
+    public Response handleTokenError(TokenException ex) {
+        return new Response(DemoExceptionEnum.TOKEN_VALIDATE__EXCEPTION);
+    }
+
+    /**
+     * 数字解析异常
+     */
+    @ExceptionHandler(NumberFormatException.class)
+    public Response handleTokenError(NumberFormatException ex) {
+        return new Response(DemoExceptionEnum.TNUMBER_FORMAt_EXCEPTION);
+    }
+
 }

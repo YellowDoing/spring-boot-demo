@@ -20,8 +20,21 @@ public class PostController {
 
 
     @PostMapping("/post")
-    public int createPost(@RequestBody @Validated Post post, Errors errors){
+    public int createPost(@RequestHeader(name = "token") String token,
+                          @RequestBody @Validated Post post, Errors errors) {
+
+
         return postMapper.createPost(post);
+    }
+
+    @GetMapping("/post")
+    public Response<List<Post>> getPosts(@RequestHeader(name = "page", defaultValue = "1") int page,
+                        @RequestHeader(name = "size", defaultValue = "10") int rows) {
+
+
+
+
+        return new Response<>();
     }
 
 
