@@ -28,13 +28,13 @@ public class PostController {
     }
 
     @GetMapping("/post")
-    public Response<List<Post>> getPosts(@RequestHeader(name = "page", defaultValue = "1") int page,
+    public int/*Response<List<Post>>*/ getPosts(@RequestHeader(name = "page", defaultValue = "1") int page,
                         @RequestHeader(name = "size", defaultValue = "10") int rows) {
 
 
 
 
-        return new Response<>();
+        return page;
     }
 
 
