@@ -7,8 +7,8 @@ import org.apache.ibatis.annotations.*;
 
 public interface UserMapper {
 
-    @Select("SELECT * FROM user WHERE username = #{username} AND password = #{password}")
-    User login(User user);
+    @Select("SELECT * FROM user WHERE username = #{username}")
+    User login(String username);
 
     @Insert("INSERT INTO user (username, password) VALUES (#{username},#{password})")
     @Options(useGeneratedKeys = true)
@@ -18,5 +18,8 @@ public interface UserMapper {
     int updateUserInfo(User user);
 
     User findUserByToken();
+
+    @Select("SELECT count(*) FROM user WHERE username = #{username}")
+    int findUserIsExist(String username);
 
 }

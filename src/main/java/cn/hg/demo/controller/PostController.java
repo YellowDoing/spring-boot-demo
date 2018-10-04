@@ -13,29 +13,32 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class PostController {
+public class PostController extends BaseController {
 
     @Autowired
     PostMapper postMapper;
 
 
     @PostMapping("/post")
-    public int createPost(@RequestHeader(name = "token") String token,
-                          @RequestBody @Validated Post post, Errors errors) {
+    public Response createPost(@RequestHeader(name = "token") String token,
+                               @RequestBody @Validated Post post, Errors errors) {
 
-
-        return postMapper.createPost(post);
+//postMapper.createPost(post)
+        return new Response();
     }
 
     @GetMapping("/post")
     public int/*Response<List<Post>>*/ getPosts(@RequestHeader(name = "page", defaultValue = "1") int page,
-                        @RequestHeader(name = "size", defaultValue = "10") int rows) {
-
-
+                                                @RequestHeader(name = "size", defaultValue = "10") int rows) {
 
 
         return page;
     }
 
+    @PostMapping("/")
+    public void test(String tokenint) {
+        System.out.println("..................");
+
+    }
 
 }

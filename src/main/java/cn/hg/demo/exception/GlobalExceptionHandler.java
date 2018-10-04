@@ -41,7 +41,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(NumberFormatException.class)
     public Response handleTokenError(NumberFormatException ex) {
-        return new Response(DemoExceptionEnum.TNUMBER_FORMAt_EXCEPTION);
+        return new Response(DemoExceptionEnum.TNUMBER_FORMAT_EXCEPTION);
     }
 
 }

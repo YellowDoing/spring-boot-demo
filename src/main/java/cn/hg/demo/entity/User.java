@@ -2,7 +2,7 @@ package cn.hg.demo.entity;
 
 import javax.validation.constraints.NotNull;
 
-public class User extends BaseBean{
+public class User{
 
     private int id;
     private String username;
@@ -10,6 +10,15 @@ public class User extends BaseBean{
     private String phone;
     private String avatar;
     private String nickname;
+    private String token;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     public String getPhone() {
         return phone;

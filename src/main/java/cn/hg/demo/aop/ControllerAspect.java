@@ -23,6 +23,7 @@ public class ControllerAspect {
         Object[] objects = jp.getArgs();
         for (Object o : objects ){
             System.out.println(o.getClass().getName());
+            System.out.println(o.getClass().getDe);
             if (o instanceof BeanPropertyBindingResult){
                 if (((BeanPropertyBindingResult)o).hasErrors()){
                     throw new ValidateException(((BeanPropertyBindingResult)o).getAllErrors().get(0));

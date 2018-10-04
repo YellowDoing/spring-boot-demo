@@ -13,6 +13,11 @@ public class Response<T> {
         message = "操作成功";
     }
 
+    public Response(T t) {
+        this();
+        data = t;
+    }
+
     public Response(DemoExceptionEnum exceptionEnum) {
         code = exceptionEnum.getCode();
         message = exceptionEnum.getMeaage();

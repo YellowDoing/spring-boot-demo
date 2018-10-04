@@ -6,7 +6,7 @@ import cn.hg.demo.entity.Response;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class CommentController {
+public class CommentController extends BaseController{
 
     @PostMapping("/comment")
     public Response comment(@RequestBody  Comment comment){
