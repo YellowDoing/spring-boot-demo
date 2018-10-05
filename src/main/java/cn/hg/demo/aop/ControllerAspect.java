@@ -1,8 +1,13 @@
 package cn.hg.demo.aop;
 
+import cn.hg.demo.dao.TokenMapper;
+import cn.hg.demo.entity.Response;
+import cn.hg.demo.exception.DemoExceptionEnum;
+import cn.hg.demo.exception.TokenException;
 import cn.hg.demo.exception.ValidateException;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BeanPropertyBindingResult;
 
@@ -14,6 +19,9 @@ import org.springframework.validation.BeanPropertyBindingResult;
 @Component
 public class ControllerAspect {
 
+    @Autowired
+    private TokenMapper tokenMapper;
+
     @Pointcut("execution(* cn.hg.demo.controller..*.*(..))")
     public void pointCut() {
     }
@@ -22,11 +30,22 @@ public class ControllerAspect {
     public Object validateErrors(ProceedingJoinPoint jp) throws Throwable {
         Object[] objects = jp.getArgs();
         for (Object o : objects ){
-            System.out.println(o.getClass().getName());
-            System.out.println(o.getClass().getDe);
+
+            /**
+             * 参数校验
+             */
             if (o instanceof BeanPropertyBindingResult){
                 if (((BeanPropertyBindingResult)o).hasErrors()){
                     throw new ValidateException(((BeanPropertyBindingResult)o).getAllErrors().get(0));
+                }
+            }
+
+            /**
+             * token验证
+             */
+            if (o instanceof String){
+                if (tokenMapper.checkToken(o.toString()) != 1){
+                    throw  new TokenException();
                 }
             }
         }

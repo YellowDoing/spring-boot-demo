@@ -9,11 +9,10 @@ import java.util.List;
 public interface PostMapper {
 
 
-    @Insert("INSERT INTO post (user_id,content, type) VALUES (#{user_id},#{content},#{type})")
+    @Insert("INSERT INTO post (user_id,content, type, media_attachment) VALUES (#{user_id},#{content},#{type},#{media_attachment})")
     int createPost(Post post);
 
-   // List<Post> selectPosts
-
+    // List<Post> selectPosts
 
 
 }

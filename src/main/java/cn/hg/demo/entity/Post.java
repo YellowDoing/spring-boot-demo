@@ -16,13 +16,14 @@ public class Post extends BaseBean{
     private Integer type;
 
 
-
     private User creator;
 
     private List<Comment> comments;
 
     @NotNull(message = "user_id不能为空")
     private Integer user_id;
+
+    private String media_attachment;
 
     @NotNull(message = "token不能为空")
     private String token;
@@ -63,6 +64,14 @@ public class Post extends BaseBean{
 
     public void setCreator(User creator) {
         this.creator = creator;
+    }
+
+    public String getMedia_attachment() {
+        return media_attachment;
+    }
+
+    public void setMedia_attachment(String media_attachment) {
+        this.media_attachment = media_attachment;
     }
 
     public List<Comment> getComments() {

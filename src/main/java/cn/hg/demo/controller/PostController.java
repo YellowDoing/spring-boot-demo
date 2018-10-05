@@ -20,10 +20,10 @@ public class PostController extends BaseController {
 
 
     @PostMapping("/post")
-    public Response createPost(@RequestHeader(name = "token") String token,
-                               @RequestBody @Validated Post post, Errors errors) {
+    public Response createPost(@RequestHeader(name = "token") String token, @RequestBody @Validated Post post, Errors errors) {
 
 //postMapper.createPost(post)
+
         return new Response();
     }
 
@@ -36,8 +36,10 @@ public class PostController extends BaseController {
     }
 
     @PostMapping("/")
-    public void test(String tokenint) {
-        System.out.println("..................");
+    public void test(String token) {
+
+
+
 
     }
 
