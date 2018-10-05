@@ -22,4 +22,7 @@ public interface UserMapper {
     @Select("SELECT count(*) FROM user WHERE username = #{username}")
     int findUserIsExist(String username);
 
+    @Select("SELECT * FROM user WHERE id = #{id}")
+    User findUserById(int id);
+
 }
