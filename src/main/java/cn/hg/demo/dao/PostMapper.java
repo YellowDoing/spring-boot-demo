@@ -2,10 +2,7 @@ package cn.hg.demo.dao;
 
 import cn.hg.demo.entity.Post;
 import cn.hg.demo.entity.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -17,6 +14,9 @@ public interface PostMapper {
 
     // List<Post>
     @Select("SELECT * FROM post limit #{start},#{end}")
+    @Results({
+            @Result(property = "creator",column = "user_id")
+    })
     List<Post> selectPosts(@Param(value = "start")int start,@Param(value = "end")int end);
 
 }
