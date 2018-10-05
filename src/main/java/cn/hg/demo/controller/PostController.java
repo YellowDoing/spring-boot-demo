@@ -22,23 +22,20 @@ public class PostController extends BaseController {
     @PostMapping("/post")
     public Response createPost(@RequestHeader(name = "token") String token, @RequestBody @Validated Post post, Errors errors) {
 
-//postMapper.createPost(post)
+        postMapper.createPost(post);
 
         return new Response();
     }
 
     @GetMapping("/post")
-    public int/*Response<List<Post>>*/ getPosts(@RequestHeader(name = "page", defaultValue = "1") int page,
-                                                @RequestHeader(name = "size", defaultValue = "10") int rows) {
+    public Response<List<Post>> getPosts(@RequestHeader(name = "page", defaultValue = "1") int page,
+                                                @RequestHeader(name = "rows", defaultValue = "10") int rows) {
 
-
-        return page;
+        return new Response<>(postMapper.selectPosts((page - 1) * rows, page* rows));
     }
 
     @PostMapping("/")
     public void test(String token) {
-
-
 
 
     }
