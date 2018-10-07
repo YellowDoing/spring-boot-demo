@@ -25,16 +25,6 @@ public class Post extends BaseBean{
 
     private String media_attachment;
 
-    @NotNull(message = "token不能为空")
-    private String token;
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
 
     public Integer getId() {
         return id;

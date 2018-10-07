@@ -34,20 +34,20 @@ public class ControllerAspect {
             /**
              * 参数校验
              */
-            if (o instanceof BeanPropertyBindingResult){
+       /*     if (o instanceof BeanPropertyBindingResult){
                 if (((BeanPropertyBindingResult)o).hasErrors()){
                     throw new ValidateException(((BeanPropertyBindingResult)o).getAllErrors().get(0));
                 }
-            }
+            }*/
 
             /**
              * token验证
              */
-            if (o instanceof String){
+          /*  if (o instanceof String){
                 if (tokenMapper.checkToken(o.toString()) != 1){
                     throw  new TokenException();
                 }
-            }
+            }*/
         }
         return jp.proceed();
     }

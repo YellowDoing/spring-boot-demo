@@ -34,6 +34,15 @@ public class PostController extends BaseController {
         return new Response<>(postMapper.selectPosts((page - 1) * rows, page* rows));
     }
 
+    @PatchMapping("/post/great/{id}")
+    public Response great(@RequestHeader(name = "token") String token,
+                          @PathVariable("id") Integer id,
+                          @RequestParam(name = "great") Integer great){
+
+
+        return new Response().setMessage("" + postMapper.great(id));
+    }
+
     @PostMapping("/")
     public void test(String token) {
 
