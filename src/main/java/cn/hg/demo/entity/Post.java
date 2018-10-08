@@ -24,7 +24,24 @@ public class Post extends BaseBean{
     private Integer user_id;
 
     private String media_attachment;
+    private Integer great_num;
+    private Integer comment_num;
 
+    public Integer getGreat_num() {
+        return great_num;
+    }
+
+    public void setGreat_num(Integer great_num) {
+        this.great_num = great_num;
+    }
+
+    public Integer getComment_num() {
+        return comment_num;
+    }
+
+    public void setComment_num(Integer comment_num) {
+        this.comment_num = comment_num;
+    }
 
     public Integer getId() {
         return id;

@@ -16,13 +16,12 @@ import springfox.documentation.annotations.ApiIgnore;
 import java.util.List;
 
 @RestController
-@Api(description ="社区相关接口")
+@Api(description = "社区相关接口")
 public class CommunityController {
 
 
     @Autowired
     private PostMapper postMapper;
-
 
 
     @PostMapping("/post")
@@ -37,29 +36,29 @@ public class CommunityController {
     }
 
 
-
     @GetMapping("/post")
     @ApiOperation(value = "帖子列表")
     public Response<List<Post>> getPosts(@RequestHeader(name = "page", defaultValue = "1") int page,
                                          @RequestHeader(name = "rows", defaultValue = "10") int rows) {
 
-        return new Response<>(postMapper.selectPosts((page - 1) * rows, page* rows));
+        return new Response<>(postMapper.selectPosts((page - 1) * rows, page * rows));
     }
 
     @PatchMapping("/post/{id}/great")
     @ApiOperation(value = "点赞")
     public Response great(@RequestHeader(name = "token") String token,
-                          @PathVariable("id") Integer id){
+                          @PathVariable("id") Integer id) {
 
-
-
-        return new Response().setMessage("" + postMapper.great(id));
+        if (postMapper.great(id) == 1)
+            return new Response();
+        else
+            return new Response().setMessage("点赞失败").setCode(10355);
     }
 
 
     @PostMapping("/comment")
     @ApiOperation(value = "评论")
-    public Response comment(@RequestBody Comment comment){
+    public Response comment(@RequestBody Comment comment) {
 
         return new Response();
     }
