@@ -5,19 +5,14 @@ import cn.hg.demo.dao.UserMapper;
 import cn.hg.demo.entity.Response;
 import cn.hg.demo.entity.User;
 import cn.hg.demo.exception.DemoExceptionEnum;
-import cn.hg.demo.exception.ValidateException;
 import cn.hg.demo.util.TokenFatory;
-import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
-import javax.validation.constraints.NotNull;
 
 @RestController
-@Api(description = "用户相关接口")
 public class UserController extends BaseController {
 
     @Autowired

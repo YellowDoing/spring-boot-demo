@@ -10,8 +10,8 @@ public enum DemoExceptionEnum {
     PASSWORD_EXCEPTION(10103, "密码错误"),
     USER_ALREADY_REGISTERED_EXCEPTION(10104, "密码错误"),
     REGISTER_EXCEPTION(10105, "注册失败，请重新尝试"),
-    USER_UPDATE_EXCEPTION(10106, "修改用户信息失败，请重新尝试");
-
+    USER_UPDATE_EXCEPTION(10106, "修改用户信息失败，请重新尝试"),
+    INSERT_DATA_EXCEPTION(10107, "插入数据库失败");
     final private int code;
     private String message;
 

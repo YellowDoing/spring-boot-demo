@@ -1,34 +1,35 @@
 package cn.hg.demo.controller;
 
 
+import cn.hg.demo.dao.CommentMapper;
 import cn.hg.demo.dao.PostMapper;
 import cn.hg.demo.entity.Comment;
 import cn.hg.demo.entity.Post;
 import cn.hg.demo.entity.Response;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.annotations.ApiIgnore;
 
+import javax.validation.Valid;
 import java.util.List;
 
+import static cn.hg.demo.exception.DemoExceptionEnum.INSERT_DATA_EXCEPTION;
+
 @RestController
-@Api(description = "社区相关接口")
 public class CommunityController {
 
 
     @Autowired
     private PostMapper postMapper;
+    @Autowired
+    private CommentMapper commentMapper;
 
 
     @PostMapping("/post")
-    @ApiOperation(value = "发帖")
     public Response createPost(@RequestHeader(name = "token") String token,
-                               @RequestBody @Validated Post post,
-                               @ApiIgnore Errors errors) {
+                               @RequestBody @Validated Post post, Errors errors) {
 
         postMapper.createPost(post);
 
@@ -37,7 +38,6 @@ public class CommunityController {
 
 
     @GetMapping("/post")
-    @ApiOperation(value = "帖子列表")
     public Response<List<Post>> getPosts(@RequestHeader(name = "page", defaultValue = "1") int page,
                                          @RequestHeader(name = "rows", defaultValue = "10") int rows) {
 
@@ -45,7 +45,6 @@ public class CommunityController {
     }
 
     @PatchMapping("/post/{id}/great")
-    @ApiOperation(value = "点赞")
     public Response great(@RequestHeader(name = "token") String token,
                           @PathVariable("id") Integer id) {
 
@@ -57,10 +56,11 @@ public class CommunityController {
 
 
     @PostMapping("/comment")
-    @ApiOperation(value = "评论")
-    public Response comment(@RequestBody Comment comment) {
-
-        return new Response();
+    public Response comment(@RequestBody @Validated Comment comment, Errors errors) {
+        if (commentMapper.insertComment(comment) == 1)
+            return new Response();
+        else
+            return new Response(INSERT_DATA_EXCEPTION);
     }
 
 }

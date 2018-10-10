@@ -1,29 +1,30 @@
 package cn.hg.demo.entity;
-
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 public class Comment extends BaseBean{
 
     private int id;
+    private int like_num;
     private String content;
-    private int user_id;
+    private String media_attachment;
 
     @NotNull(message = "请传入type")
-    @Size(max = 2,message = "请输入正确的type")
-    private int type;
+    private Integer type;
 
-    @NotNull(message = "请输入正确的level")
-    @Size(max = 2,message = "请输入正确的type")
-    private int level;
+    @NotNull(message = "请传入user_id")
+    private Integer user_id;
 
-    private int comment_id;
-    private int comment_user_id;
-    private int like_num;
+    @NotNull(message = "请传入level")
+    private Integer level;
+
+    @NotNull(message = "请传入comment_id")
+    private Integer comment_id;
+
+    @NotNull(message = "请传入comment_user_id")
+    private Integer comment_user_id;
 
     @NotNull(message = "请输入post_id")
-    @Size(min = 1 ,message = "请输入正确的post_id")
-    private int post_id;
+    private Integer post_id;
 
     public int getLevel() {
         return level;
@@ -95,5 +96,13 @@ public class Comment extends BaseBean{
 
     public void setPost_id(int post_id) {
         this.post_id = post_id;
+    }
+
+    public String getMedia_attachment() {
+        return media_attachment;
+    }
+
+    public void setMedia_attachment(String media_attachment) {
+        this.media_attachment = media_attachment;
     }
 }

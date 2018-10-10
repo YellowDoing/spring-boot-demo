@@ -1,8 +1,19 @@
 package cn.hg.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class BaseBean {
     private String create_time;
     private String update_time;
+    private String token;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     public String getCreate_time() {
         return create_time;
