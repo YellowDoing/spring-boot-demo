@@ -11,15 +11,20 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-
+/**
+ * 用户接口
+ */
 @RestController
-public class UserController extends BaseController {
+public class UserController {
 
     @Autowired
     private UserMapper userMapper;
     @Autowired
     private TokenMapper tokenMapper;
 
+    /**
+     * 登陆 --返回Token
+     */
     @PostMapping("/login")
     public Response<User> login(@Validated @RequestBody User user, Errors errors) {
         User selecteUser = userMapper.login(user.getUsername());
@@ -37,7 +42,9 @@ public class UserController extends BaseController {
         }
     }
 
-
+    /**
+     * 注册
+     */
     @PostMapping("/user")
     public Response register(@RequestBody User user, Errors errors) {
         if (userMapper.findUserIsExist(user.getUsername()) > 0) {
@@ -52,6 +59,9 @@ public class UserController extends BaseController {
     }
 
 
+    /**
+     * 更改用户信息
+     */
     @PutMapping("/user")
     public Response updateUserInfo(@RequestHeader String token, @RequestBody User user, Errors errors) {
             int isSuccess = userMapper.updateUserInfo(user);

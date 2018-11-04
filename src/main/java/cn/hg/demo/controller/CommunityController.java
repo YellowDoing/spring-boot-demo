@@ -17,6 +17,9 @@ import java.util.List;
 
 import static cn.hg.demo.exception.DemoExceptionEnum.INSERT_DATA_EXCEPTION;
 
+/**
+ * 社区接口
+ */
 @RestController
 public class CommunityController {
 
@@ -27,6 +30,10 @@ public class CommunityController {
     private CommentMapper commentMapper;
 
 
+    /**
+     * 发帖
+     * @param token post errors
+     */
     @PostMapping("/post")
     public Response createPost(@RequestHeader(name = "token") String token,
                                @RequestBody @Validated Post post, Errors errors) {
@@ -37,6 +44,9 @@ public class CommunityController {
     }
 
 
+    /**
+     * 查询帖子列表
+     */
     @GetMapping("/post")
     public Response<List<Post>> getPosts(@RequestHeader(name = "page", defaultValue = "1") int page,
                                          @RequestHeader(name = "rows", defaultValue = "10") int rows) {
@@ -55,6 +65,9 @@ public class CommunityController {
     }
 
 
+    /**
+     * 评论
+     */
     @PostMapping("/comment")
     public Response comment(@RequestBody @Validated Comment comment, Errors errors) {
         if (commentMapper.insertComment(comment) == 1)
@@ -63,4 +76,10 @@ public class CommunityController {
             return new Response(INSERT_DATA_EXCEPTION);
     }
 
+    /**
+     * 获取相关评论列表
+     */
+    public Response<Comment> getComments(){
+        return new Response();
+    }
 }
