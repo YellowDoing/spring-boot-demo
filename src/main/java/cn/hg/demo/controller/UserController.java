@@ -1,73 +1,77 @@
 package cn.hg.demo.controller;
 
-import cn.hg.demo.dao.TokenMapper;
+
 import cn.hg.demo.dao.UserMapper;
 import cn.hg.demo.entity.Response;
 import cn.hg.demo.entity.User;
-import cn.hg.demo.exception.DemoExceptionEnum;
-import cn.hg.demo.util.TokenFatory;
+import cn.hg.demo.exception.ExceptionEnum;
+import cn.hg.demo.util.TokenFactory;
+import cn.hg.demo.validation.LoginRegisterGroup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import static cn.hg.demo.exception.ExceptionEnum.EXCEPTION_UPDATE_DATA;
+
+
 /**
  * 用户接口
  */
 @RestController
+@CrossOrigin(origins = "*" , maxAge = 3600)//跨域
 public class UserController {
 
     @Autowired
     private UserMapper userMapper;
-    @Autowired
-    private TokenMapper tokenMapper;
+    private final int CODE = 10100;
 
     /**
-     * 登陆 --返回Token
+     * 登陆
      */
-    @PostMapping("/login")
-    public Response<User> login(@Validated @RequestBody User user, Errors errors) {
-        User selecteUser = userMapper.login(user.getUsername());
-        if (selecteUser == null)
-            return new Response<>(DemoExceptionEnum.USER_NULL_EXCEPTION);
-        else {
-            if (selecteUser.getPassword().equals(user.getPassword())) {
-                String token = TokenFatory.createToken();
-                int i = tokenMapper.updateUserToken(selecteUser.getId(), token);
-                System.out.println(i);
-                selecteUser.setToken(token);
-                return new Response<>(selecteUser);
-            } else
-                return new Response<>(DemoExceptionEnum.PASSWORD_EXCEPTION);
+    @PostMapping("/user/login")
+    public Response<User> login(@Validated(value = {LoginRegisterGroup.class}) User user, Errors errors) {
+        User loginUser = userMapper.getUserByUserName(user.getUsername());
+        if (loginUser == null)
+            return new Response<>(CODE, "用户名不存在");
+        else if (!loginUser.getPassword().equals(user.getPassword()))
+            return new Response<>(CODE, "密码错误");
+        else{
+            String token  = TokenFactory.createToken();
+            loginUser.setToken(token);
+            userMapper.updateUserInfo(loginUser);
+            return new Response<>(loginUser);
         }
     }
+
 
     /**
      * 注册
      */
     @PostMapping("/user")
-    public Response register(@RequestBody User user, Errors errors) {
-        if (userMapper.findUserIsExist(user.getUsername()) > 0) {
-            return new Response(DemoExceptionEnum.USER_ALREADY_REGISTERED_EXCEPTION);
-        } else {
+    public Response register(@Validated(value = {LoginRegisterGroup.class}) User user,Errors errors) {
+
+        if (userMapper.findUserByUserName(user.getUsername()) > 0)
+            return new Response<>(CODE, "用户名已存在");
+        else{
             int isSuccess = userMapper.register(user);
             if (isSuccess == 1)
                 return new Response().setMessage("注册成功");
             else
-                return new Response(DemoExceptionEnum.REGISTER_EXCEPTION);
+                return new Response(ExceptionEnum.EXCEPTION_INSERT_DATA);
         }
     }
 
 
     /**
-     * 更改用户信息
+     * 更新用户信息
      */
-    @PutMapping("/user")
-    public Response updateUserInfo(@RequestHeader String token, @RequestBody User user, Errors errors) {
-            int isSuccess = userMapper.updateUserInfo(user);
-            if (isSuccess == 1)
-                return new Response();
-            else
-                return new Response(DemoExceptionEnum.USER_UPDATE_EXCEPTION);
+    @PutMapping("/user/{id}")
+    public Response updateUserInfo(@RequestBody User user) {
+        int isSuccess = userMapper.updateUserInfo(user);
+        if (isSuccess == 1)
+            return new Response();
+        else
+            return new Response<>(EXCEPTION_UPDATE_DATA);
     }
 }

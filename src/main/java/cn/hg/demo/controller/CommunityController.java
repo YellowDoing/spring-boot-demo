@@ -1,18 +1,15 @@
 package cn.hg.demo.controller;
 
 
-import cn.hg.demo.dao.CommentMapper;
-import cn.hg.demo.dao.PostMapper;
+import cn.hg.demo.dao.CommunityMapper;
 import cn.hg.demo.entity.Comment;
 import cn.hg.demo.entity.Post;
 import cn.hg.demo.entity.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 import static cn.hg.demo.exception.DemoExceptionEnum.INSERT_DATA_EXCEPTION;
@@ -23,11 +20,9 @@ import static cn.hg.demo.exception.DemoExceptionEnum.INSERT_DATA_EXCEPTION;
 @RestController
 public class CommunityController {
 
+    @Autowired
+    private CommunityMapper postMapper;
 
-    @Autowired
-    private PostMapper postMapper;
-    @Autowired
-    private CommentMapper commentMapper;
 
 
     /**
@@ -70,7 +65,7 @@ public class CommunityController {
      */
     @PostMapping("/comment")
     public Response comment(@RequestBody @Validated Comment comment, Errors errors) {
-        if (commentMapper.insertComment(comment) == 1)
+        if (postMapper.insertComment(comment) == 1)
             return new Response();
         else
             return new Response(INSERT_DATA_EXCEPTION);

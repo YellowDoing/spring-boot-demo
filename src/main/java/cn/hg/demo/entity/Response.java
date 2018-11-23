@@ -1,6 +1,6 @@
 package cn.hg.demo.entity;
 
-import cn.hg.demo.exception.DemoExceptionEnum;
+import cn.hg.demo.exception.ExceptionEnum;
 
 public class Response<T> {
 
@@ -13,30 +13,39 @@ public class Response<T> {
         message = "操作成功";
     }
 
-    public Response(T t) {
-        this();
+    public Response(T t){
+        super();
         data = t;
     }
 
-    public Response(DemoExceptionEnum exceptionEnum) {
+    public Response(ExceptionEnum exceptionEnum) {
         code = exceptionEnum.getCode();
-        message = exceptionEnum.getMeaage();
+        message = exceptionEnum.getMessage();
+    }
+
+    public Response(int code, String message) {
+        this.code = code;
+        this.message = message;
+    }
+
+    public void setException(ExceptionEnum exceptionEnum){
+        code = exceptionEnum.getCode();
+        message = exceptionEnum.getMessage();
     }
 
     public int getCode() {
         return code;
     }
 
-    public Response setCode(int code) {
+    public void setCode(int code) {
         this.code = code;
-        return this;
     }
 
     public String getMessage() {
         return message;
     }
 
-    public Response setMessage(String message) {
+    public Response<T> setMessage(String message) {
         this.message = message;
         return this;
     }

@@ -1,6 +1,5 @@
 package cn.hg.demo.exception;
 
-import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
 
 public class ValidateException extends Exception {
