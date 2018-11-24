@@ -31,7 +31,7 @@ public class UserController extends BaseController {
      * 登陆
      */
     @PostMapping("/user/login")
-    public Response<User> login(@Validated(value = {LoginRegisterGroup.class}) User user, Errors errors) {
+    public Response<User> login(@RequestBody @Validated(value = {LoginRegisterGroup.class}) User user, Errors errors) {
         User loginUser = userMapper.getUserByUserName(user.getUsername());
         if (loginUser == null)
             return new Response<>(CODE, "用户名不存在");
@@ -50,7 +50,7 @@ public class UserController extends BaseController {
      * 注册
      */
     @PostMapping("/user")
-    public Response register(@Validated(value = {LoginRegisterGroup.class}) User user, Errors errors) {
+    public Response register(@RequestBody @Validated(value = {LoginRegisterGroup.class}) User user, Errors errors) {
         if (userMapper.findUserByUserName(user.getUsername()) > 0)
             return new Response<>(CODE, "用户名已存在");
         else {

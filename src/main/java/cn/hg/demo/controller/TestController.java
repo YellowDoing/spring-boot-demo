@@ -23,4 +23,9 @@ public class TestController extends BaseController{
         return new Response().setMessage(redisService.getString(key));
     }
 
+    @PostMapping("/test2")
+    public Response redisSetString(String key,String value){
+        redisService.setString(key,value);
+        return new Response();
+    }
 }
