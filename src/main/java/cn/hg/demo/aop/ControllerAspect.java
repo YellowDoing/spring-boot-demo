@@ -18,8 +18,7 @@ import org.springframework.validation.BeanPropertyBindingResult;
 @Component
 public class ControllerAspect {
 
-    @Autowired
-    private TokenMapper tokenMapper;
+
 
     @Pointcut("execution(* cn.hg.demo.controller..*.*(..))")
     public void pointCut() {

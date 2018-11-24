@@ -5,21 +5,18 @@ import cn.hg.demo.dao.CommunityMapper;
 import cn.hg.demo.entity.Comment;
 import cn.hg.demo.entity.Post;
 import cn.hg.demo.entity.Response;
+import cn.hg.demo.exception.ExceptionEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-
-import static cn.hg.demo.exception.DemoExceptionEnum.INSERT_DATA_EXCEPTION;
-
 /**
  * 社区接口
  */
 @RestController
-public class CommunityController {
-
+public class CommunityController extends BaseController{
+    private final int CODE = 10354;
     @Autowired
     private CommunityMapper postMapper;
 
@@ -50,13 +47,11 @@ public class CommunityController {
     }
 
     @PatchMapping("/post/{id}/great")
-    public Response great(@RequestHeader(name = "token") String token,
-                          @PathVariable("id") Integer id) {
-
+    public Response great(@RequestHeader(name = "token") String token, @PathVariable("id") Integer id) {
         if (postMapper.great(id) == 1)
             return new Response();
         else
-            return new Response().setMessage("点赞失败").setCode(10355);
+            return new Response(CODE,"点赞失败");
     }
 
 
@@ -68,7 +63,7 @@ public class CommunityController {
         if (postMapper.insertComment(comment) == 1)
             return new Response();
         else
-            return new Response(INSERT_DATA_EXCEPTION);
+            return new Response(ExceptionEnum.EXCEPTION_INSERT_DATA);
     }
 
     /**
