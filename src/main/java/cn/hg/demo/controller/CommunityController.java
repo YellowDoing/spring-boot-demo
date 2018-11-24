@@ -6,33 +6,35 @@ import cn.hg.demo.entity.Comment;
 import cn.hg.demo.entity.Post;
 import cn.hg.demo.entity.Response;
 import cn.hg.demo.exception.ExceptionEnum;
+import cn.hg.demo.exception.TokenException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+
 /**
  * 社区接口
  */
 @RestController
 public class CommunityController extends BaseController{
+
     private final int CODE = 10354;
     @Autowired
     private CommunityMapper postMapper;
 
-
-
     /**
      * 发帖
-     * @param token post errors
      */
     @PostMapping("/post")
     public Response createPost(@RequestHeader(name = "token") String token,
-                               @RequestBody @Validated Post post, Errors errors) {
-
-        postMapper.createPost(post);
-
-        return new Response();
+                               @RequestBody @Validated Post post, Errors errors) throws TokenException {
+        checkToken(token);
+        int isSuccess = postMapper.createPost(post);
+        if (isSuccess == 1)
+            return new Response();
+        else
+            return new Response(ExceptionEnum.EXCEPTION_INSERT_DATA);
     }
 
 
@@ -42,10 +44,13 @@ public class CommunityController extends BaseController{
     @GetMapping("/post")
     public Response<List<Post>> getPosts(@RequestHeader(name = "page", defaultValue = "1") int page,
                                          @RequestHeader(name = "rows", defaultValue = "10") int rows) {
-
         return new Response<>(postMapper.selectPosts((page - 1) * rows, page * rows));
     }
 
+    /**
+     * 点赞
+     * @param token
+     */
     @PatchMapping("/post/{id}/great")
     public Response great(@RequestHeader(name = "token") String token, @PathVariable("id") Integer id) {
         if (postMapper.great(id) == 1)

@@ -3,7 +3,6 @@ import javax.validation.constraints.NotNull;
 
 public class Comment extends BaseBean{
 
-    private int id;
     private int like_num;
     private String content;
     private String media_attachment;
@@ -32,14 +31,6 @@ public class Comment extends BaseBean{
 
     public void setLevel(int level) {
         this.level = level;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getContent() {

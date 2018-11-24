@@ -5,14 +5,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class BaseBean {
     private String create_time;
     private String update_time;
-    private String token;
+    private Integer id;
 
-    public String getToken() {
-        return token;
+    public Integer getId() {
+        return id;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getCreate_time() {

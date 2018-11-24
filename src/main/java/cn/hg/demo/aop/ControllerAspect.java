@@ -29,7 +29,6 @@ public class ControllerAspect {
     public Object validateErrors(ProceedingJoinPoint jp) throws Throwable {
         Object[] objects = jp.getArgs();
         for (Object o : objects ){
-
             /*
              * 参数校验
              */
@@ -39,15 +38,6 @@ public class ControllerAspect {
                     throw new ValidateException(beanPropertyBindingResult.getAllErrors().get(0));
                 }
             }
-
-            /*
-             * token验证
-             */
-           /* if (o instanceof BaseBean){
-                if (tokenMapper.checkToken(((BaseBean) o).getToken()) != 1){
-                    throw  new TokenException();
-                }
-            }*/
         }
         return jp.proceed();
     }
