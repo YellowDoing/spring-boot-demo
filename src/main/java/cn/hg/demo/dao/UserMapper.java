@@ -2,12 +2,16 @@ package cn.hg.demo.dao;
 
 import cn.hg.demo.dao.provider.UserSqlProvider;
 import cn.hg.demo.entity.User;
+import cn.hg.demo.exception.ExceptionEnum;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.UpdateProvider;
 
 public interface UserMapper {
+
+    @Select("SELECT * FROM user WHERE username = #{username}")
+    User findUserById(Integer id);
 
     @Select("SELECT * FROM user WHERE username = #{username}")
     User getUserByUserName(String username);

@@ -1,6 +1,7 @@
 package cn.hg.demo.exception;
 
 import cn.hg.demo.entity.Response;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,23 +18,23 @@ public class GlobalExceptionHandler {
         return new Response(ExceptionEnum.EXCEPTION_PARAM_VALIDATE.getCode(),ex.getMessage());
     }
 
-  /*  *//**
+    /**
      * 无请求体异常
-     *//*
+     */
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public Response handleMissRequestBodyError(HttpMessageNotReadableException ex) {
-        return new Response(DemoExceptionEnum.MISSING_REQUEST_BODY_EXCEPTION);
+        return new Response(ExceptionEnum.EXCEPTION_MISSING_REQUEST_BODY);
     }
 
-    *//**
+    /**
      * token验证失效
-     *//*
+     */
     @ExceptionHandler(TokenException.class)
     public Response handleTokenError(TokenException ex) {
-        return new Response(DemoExceptionEnum.TOKEN_VALIDATE__EXCEPTION);
+        return new Response(ExceptionEnum.EXCEPTION_TOKEN_VALIDATE);
     }
 
-    *//**
+    /*//**
      * 数字解析异常
      *//*
     @ExceptionHandler(NumberFormatException.class)
