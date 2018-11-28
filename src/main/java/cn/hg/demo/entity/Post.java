@@ -15,6 +15,15 @@ public class Post extends BaseBean{
     private String media_attachment;
     private Integer great_num;
     private Integer comment_num;
+    private boolean isGreat;
+
+    public boolean isGreat() {
+        return isGreat;
+    }
+
+    public void setGreat(boolean great) {
+        isGreat = great;
+    }
 
     public Integer getGreat_num() {
         return great_num;

@@ -8,6 +8,10 @@ public class UserSqlProvider {
     public String getUserInfoUpdateSql(User user) {
         SQL sql = new SQL().UPDATE("user");
 
+        if (user.getToken() != null) {
+            sql.SET("token = \"" + user.getToken() + "\"");
+        }
+
         if (user.getPhone() != null) {
             sql.SET("phone = \"" + user.getPhone() + "\"");
         }

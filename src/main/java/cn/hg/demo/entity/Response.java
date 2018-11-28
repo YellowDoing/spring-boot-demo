@@ -3,18 +3,15 @@ package cn.hg.demo.entity;
 import cn.hg.demo.exception.ExceptionEnum;
 
 public class Response<T> {
-
-    private int code;
-    private String message;
+    private int code = 10000;
+    private String message = "操作成功";
     private T data;
 
+
     public Response() {
-        code = 10000;
-        message = "操作成功";
     }
 
     public Response(T t){
-        super();
         data = t;
     }
 

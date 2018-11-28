@@ -1,6 +1,7 @@
 package cn.hg.demo.entity;
 
 import cn.hg.demo.validation.LoginRegisterGroup;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.validation.constraints.NotNull;
 public class User extends BaseBean{
@@ -8,8 +9,10 @@ public class User extends BaseBean{
     @NotNull(message = "用户名不能为空",groups = {LoginRegisterGroup.class})
     private String username;
 
+    @JsonIgnore
     @NotNull(message = "密码不能为空",groups = {LoginRegisterGroup.class})
     private String password;
+
     private String phone;
     private String avatar;
     private String nickname;

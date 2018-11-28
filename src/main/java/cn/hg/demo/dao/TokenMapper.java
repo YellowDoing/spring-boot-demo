@@ -12,4 +12,5 @@ public interface TokenMapper {
 
     @Update("UPDATE user SET token = #{token} WHERE id = #{user_id}")
     int updateUserToken(@Param(value = "user_id") int user_id,@Param(value = "token") String token);
+
 }

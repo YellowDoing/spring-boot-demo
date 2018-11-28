@@ -21,9 +21,16 @@ public interface CommunityMapper {
     List<Post> selectPosts(@Param(value = "start")int start, @Param(value = "end")int end);
 
     //点赞
-    @Update("UPDATE post SET great_num = great_num + 1 WHERE id = #{post_id}")
-    int great(int post_id);
+    @Insert("INSERT INTO great (post_id,user_id) VALUES (#{post_id},#{user_id})")
+    int insertGreat(@Param(value = "post_id")int post_id,@Param(value = "user_id")int user_id);
 
+    //删除点赞
+    @Delete("DELETE FROM great WHERE post_id = #{post_id} AND user_id = #{user_id}")
+    int deleteGreat(@Param(value = "post_id")int post_id,@Param(value = "user_id")int user_id);
+
+    //获取所有点赞的人
+    @Select("SELECT * FROM great WHERE post_id = #{post_id}")
+    List<Post> getGreatsByPostId(int post_id);
 
     //评论
     @Insert("INSERT INTO comment (user_id,comment_id,comment_user_id,post_id,level,content, type, media_attachment)" +

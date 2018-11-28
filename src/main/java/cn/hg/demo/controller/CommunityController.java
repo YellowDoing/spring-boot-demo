@@ -51,12 +51,30 @@ public class CommunityController extends BaseController{
      * 点赞
      * @param token
      */
-    @PatchMapping("/post/{id}/great")
-    public Response great(@RequestHeader(name = "token") String token, @PathVariable("id") Integer id) {
-        if (postMapper.great(id) == 1)
+    @PostMapping("/great/{id}")
+    public Response great(@RequestHeader(name = "token") String token,
+                          @RequestParam(name = "user_id")Integer user_id,
+                          @PathVariable("id") Integer id) throws TokenException{
+        checkToken(token);
+        if (postMapper.insertGreat(id,user_id) == 1)
             return new Response();
         else
             return new Response(CODE,"点赞失败");
+    }
+
+    /**
+     * 取赞
+     * @param token
+     */
+    @PostMapping("/unGreat/{id}")
+    public Response unGreat(@RequestHeader(name = "token") String token,
+                          @RequestParam(name = "user_id")Integer user_id,
+                          @PathVariable("id") Integer id) throws TokenException{
+        checkToken(token);
+        if (postMapper.deleteGreat(id,user_id) == 1)
+            return new Response();
+        else
+            return new Response(CODE,"取赞失败");
     }
 
 
