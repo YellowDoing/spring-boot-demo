@@ -1,5 +1,6 @@
 package cn.hg.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotNull;
@@ -16,6 +17,16 @@ public class Post extends BaseBean{
     private Integer great_num;
     private Integer comment_num;
     private boolean isGreat;
+    @JsonIgnore
+    private List<Great> greatList;
+
+    public List<Great> getGreatList() {
+        return greatList;
+    }
+
+    public void setGreatList(List<Great> greatList) {
+        this.greatList = greatList;
+    }
 
     public boolean isGreat() {
         return isGreat;

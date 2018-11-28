@@ -16,7 +16,8 @@ public interface CommunityMapper {
     //获取帖子
     @Select("SELECT * FROM post ORDER BY update_time DESC limit #{start},#{end} ")
     @Results({
-            @Result(property = "creator",column = "user_id",one = @One(select = "cn.hg.demo.dao.UserMapper.findUserById"))
+            @Result(property = "creator",column = "user_id",one = @One(select = "cn.hg.demo.dao.UserMapper.findUserById")),
+            @Result(property = "greatList",column = "id",many = @Many(select = "cn.hg.demo.dao.CommunityMapper.GreatsByPostId"))
     })
     List<Post> selectPosts(@Param(value = "start")int start, @Param(value = "end")int end);
 
