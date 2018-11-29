@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class BaseBean {
     private String create_time;
     private String update_time;
-    private Integer id;
+    private int id;
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 

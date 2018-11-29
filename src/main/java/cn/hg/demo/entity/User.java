@@ -9,7 +9,6 @@ public class User extends BaseBean{
     @NotNull(message = "用户名不能为空",groups = {LoginRegisterGroup.class})
     private String username;
 
-    @JsonIgnore
     @NotNull(message = "密码不能为空",groups = {LoginRegisterGroup.class})
     private String password;
 

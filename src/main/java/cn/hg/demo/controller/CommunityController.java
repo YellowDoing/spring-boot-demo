@@ -27,7 +27,7 @@ public class CommunityController extends BaseController{
      * 发帖
      */
     @PostMapping("/post")
-    public Response createPost(@RequestHeader(name = "token") String token,
+    public Response createPost(@RequestHeader(name = "token",defaultValue = "") String token,
                                @RequestBody @Validated Post post, Errors errors) throws TokenException {
         checkToken(token);
         int isSuccess = postMapper.createPost(post);
@@ -52,7 +52,7 @@ public class CommunityController extends BaseController{
      * @param token
      */
     @PostMapping("/great/{id}")
-    public Response great(@RequestHeader(name = "token") String token,
+    public Response great(@RequestHeader(name = "token",defaultValue = "") String token,
                           @RequestParam(name = "user_id")Integer user_id,
                           @PathVariable("id") Integer id) throws TokenException{
         checkToken(token);
