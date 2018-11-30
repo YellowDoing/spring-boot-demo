@@ -14,9 +14,17 @@ public class Post extends BaseBean{
     @NotNull(message = "user_id不能为空")
     private int user_id;
     private String media_attachment;
-    private int great_num;
     private int comment_num;
     private List<Great> greatList;
+    private List<Comment> commentList;
+
+    public List<Comment> getCommentList() {
+        return commentList;
+    }
+
+    public void setCommentList(List<Comment> commentList) {
+        this.commentList = commentList;
+    }
 
     public List<Great> getGreatList() {
         return greatList;
@@ -30,16 +38,16 @@ public class Post extends BaseBean{
         return user_id;
     }
 
-    public int getGreat_num() {
-        return great_num;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
+    public void setComment_num(int comment_num) {
+        this.comment_num = comment_num;
     }
 
     public int getComment_num() {
         return comment_num;
-    }
-
-    public void setGreat_num(Integer great_num) {
-        this.great_num = great_num;
     }
 
 

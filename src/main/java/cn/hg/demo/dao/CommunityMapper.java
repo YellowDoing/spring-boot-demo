@@ -6,8 +6,10 @@ import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
+/**
+ * 社区
+ */
 public interface CommunityMapper {
-
 
     //发帖
     @Insert("INSERT INTO post (user_id,content, media_attachment) VALUES (#{user_id},#{content},#{media_attachment})")
@@ -36,9 +38,11 @@ public interface CommunityMapper {
     List<Post> getGreatsByPostId(int post_id);
 
     //评论
-    @Insert("INSERT INTO comment (user_id,comment_id,comment_user_id,post_id,level,content, type, media_attachment)" +
-            " VALUES (#{user_id},#{comment_id},#{comment_user_id},#{post_id},#{level},#{content},#{type},#{media_attachment})")
+    @Insert("INSERT INTO comment (user_id,comment_id,comment_user_id,post_id,level,content) VALUES (#{user_id},#{comment_id},#{comment_user_id},#{post_id},#{level},#{content})")
     int insertComment(Comment comment);
 
-    int deletCommentById();
+    //查询评论
+    @Select("SELECT * FROM comment WHERE post_id = #{post_id}")
+    List<Comment> getCommentsByPostId(int post_id);
+
 }

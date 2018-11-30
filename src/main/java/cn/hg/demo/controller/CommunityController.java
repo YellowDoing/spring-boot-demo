@@ -92,7 +92,8 @@ public class CommunityController extends BaseController{
     /**
      * 获取相关评论列表
      */
-    public Response<Comment> getComments(){
-        return new Response();
+    @GetMapping("/post/{id}/comments")
+    public Response<List<Comment>> getComments(@PathVariable("id") Integer id){
+        return new Response(postMapper.getCommentsByPostId(id));
     }
 }

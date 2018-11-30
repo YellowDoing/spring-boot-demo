@@ -3,12 +3,8 @@ import javax.validation.constraints.NotNull;
 
 public class Comment extends BaseBean{
 
-    private int like_num;
+    @NotNull(message = "请传入content")
     private String content;
-    private String media_attachment;
-
-    @NotNull(message = "请传入type")
-    private Integer type;
 
     @NotNull(message = "请传入user_id")
     private Integer user_id;
@@ -49,14 +45,6 @@ public class Comment extends BaseBean{
         this.user_id = user_id;
     }
 
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
     public int getComment_id() {
         return comment_id;
     }
@@ -73,14 +61,6 @@ public class Comment extends BaseBean{
         this.comment_user_id = comment_user_id;
     }
 
-    public int getLike_num() {
-        return like_num;
-    }
-
-    public void setLike_num(int like_num) {
-        this.like_num = like_num;
-    }
-
     public int getPost_id() {
         return post_id;
     }
@@ -89,11 +69,4 @@ public class Comment extends BaseBean{
         this.post_id = post_id;
     }
 
-    public String getMedia_attachment() {
-        return media_attachment;
-    }
-
-    public void setMedia_attachment(String media_attachment) {
-        this.media_attachment = media_attachment;
-    }
 }
