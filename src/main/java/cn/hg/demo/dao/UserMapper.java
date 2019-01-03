@@ -3,12 +3,13 @@ package cn.hg.demo.dao;
 import cn.hg.demo.dao.provider.UserSqlProvider;
 import cn.hg.demo.entity.User;
 import cn.hg.demo.exception.ExceptionEnum;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.UpdateProvider;
 
-public interface UserMapper {
+public interface UserMapper extends BaseMapper<User> {
 
     @Select("SELECT * FROM user WHERE id = #{id}")
     User findUserById(Integer id);

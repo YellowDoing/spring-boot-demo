@@ -15,12 +15,15 @@ public class UserSqlProvider {
         if (user.getPhone() != null) {
             sql.SET("phone = \"" + user.getPhone() + "\"");
         }
+
         if (user.getAvatar() != null) {
             sql.SET("avatar = \"" + user.getAvatar() + "\"");
         }
+
         if (user.getNickname() != null) {
             sql.SET("nickname = \"" + user.getNickname()+"\"");
         }
+
         return sql.WHERE("id = " + user.getId()).toString();
     }
 }

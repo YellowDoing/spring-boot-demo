@@ -2,7 +2,6 @@ package cn.hg.demo.entity;
 
 import cn.hg.demo.validation.LoginRegisterGroup;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.validation.constraints.NotNull;
 
 public class User extends BaseBean{
