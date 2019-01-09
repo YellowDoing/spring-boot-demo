@@ -18,12 +18,9 @@ import org.springframework.validation.BeanPropertyBindingResult;
 @Component
 public class ControllerAspect {
 
-
-
     @Pointcut("execution(* cn.hg.demo.controller..*.*(..))")
     public void pointCut() {
     }
-
 
     @Around("pointCut()")
     public Object validateErrors(ProceedingJoinPoint jp) throws Throwable {
